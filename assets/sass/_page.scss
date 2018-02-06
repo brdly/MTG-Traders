@@ -1,0 +1,26 @@
+body {
+    .wrapper {
+        height: auto;
+        width: 100%;
+        background-image: linear-gradient(#333F92, #57368C);
+        padding: 10px;
+
+        nav {
+            margin-bottom: 10px;
+        }
+
+        .container-fluid {
+            padding: 15px;
+            margin-bottom: 10px;
+            min-height: calc(100vh - 145px);
+        }
+
+        footer {
+            padding: 15px;
+
+            h6 {
+                margin-bottom: 0;
+            }
+        }
+    }
+}

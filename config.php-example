@@ -1,0 +1,9 @@
+<?php
+
+class Config
+{
+    static $dbHost      = '127.0.0.1';
+    static $dbUsername  = 'root';
+    static $dbPassword  = '';
+    static $dbName      = 'css_project';
+}
