@@ -1,5 +1,6 @@
 /.idea/
 /.DS_Store
+/**/.DS_Store
 /vendor/
 /config.php
 /composer.phar
