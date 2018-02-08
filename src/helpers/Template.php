@@ -5,7 +5,6 @@
  * Date: 05/02/2018
  * Time: 21:58
  */
-namespace MtG\Helper;
 
 class Template {
     private $vars  = array();

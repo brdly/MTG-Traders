@@ -6,22 +6,10 @@
         { "name": "George Broadley",  "email": "G.Broadley@edu.salford.ac.uk" }
     ],
     "require": {
-        "mtgsdk/mtgsdk": "dev-master"
+        "mtgsdk/mtgsdk": "dev-master",
+        "fzaninotto/faker": "v1.7.1"
     },
     "require-dev": {
         "phpunit/phpunit": "~6.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "MtG\\" : "src\\models",
-            "MtG\\App\\" : "src\\controllers",
-            "MtG\\Helper\\" : "src\\helpers"
-        },
-        "files": ["config.php"]
-    },
-    "autoload-dev": {
-        "psr-0": {
-            "MtG\\Tests\\": "tests/"
-        }
     }
 }
