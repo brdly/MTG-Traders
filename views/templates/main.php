@@ -5,6 +5,11 @@
  * Date: 05/02/2018
  * Time: 21:59
  */
+
+require_once __DIR__ . "/../../src/helpers/Navbar.php";
+
+$nav = new Navbar();
+$nav = Navbar::generate();
 ?>
 
 <!doctype html>
@@ -28,25 +33,47 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
+                <li class="nav-item<?php if ($title === "Home") : ?> active<?php endif; ?>"><a class="nav-link" href="/">Home</a></li>
+                <?php foreach ($nav["sets"] as $key => $value) : ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <?php echo ucfirst($key); ?> Sets
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <?php foreach ($value as $set) : ?>
+                                <a class="dropdown-item" href="/sets.php?id=<?php echo $set["id"]; ?>"><i class="ss ss-<?php echo $set["setcode"]; ?> ss-grad ss-fw"></i> <?php echo $set["setname"]; ?></a>
+                            <?php endforeach; ?>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <a class="btn btn-outline-success ml-2 my-2 my-sm-0" href="#">Advanced Search</a>
             </form>
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-user fa-fw"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <span class="navbar-text dropdown-item">Hello, George</span>
-                        <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-fw"></i> Sign Out</a>
-                        <a class="dropdown-item" href="./login.php"><i class="fas fa-sign-in-alt fa-fw"></i> Sign In</a>
-                        <a class="dropdown-item" href="./register.php"><i class="fas fa-user-plus fa-fw"></i> Register</a>
-                    </div>
+                    <?php if (isset($_SESSION["user"])) : ?>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <?php echo $_SESSION["user"]["firstname"] . " " . $_SESSION["user"]["lastname"]; ?>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="./signout.php"><i class="fas fa-sign-out-alt fa-fw"></i> Post Ad</a>
+                            <a class="dropdown-item" href="./signout.php"><i class="fas fa-sign-out-alt fa-fw"></i> Your Ads</a>
+                            <a class="dropdown-item" href="./signout.php"><i class="fas fa-sign-out-alt fa-fw"></i> Watch List</a>
+                            <a class="dropdown-item" href="./signout.php"><i class="fas fa-sign-out-alt fa-fw"></i> Account Settings</a>
+                            <a class="dropdown-item" href="./signout.php"><i class="fas fa-sign-out-alt fa-fw"></i> Sign Out</a>
+                        </div>
+                    <?php else : ?>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Login/Register
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="./login.php"><i class="fas fa-sign-in-alt fa-fw"></i> Sign In</a>
+                            <a class="dropdown-item" href="./register.php"><i class="fas fa-user-plus fa-fw"></i> Register</a>
+                        </div>
+                    <?php endif; ?>
                 </li>
             </ul>
         </div>
