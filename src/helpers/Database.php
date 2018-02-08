@@ -5,17 +5,12 @@
  * Date: 30/01/2018
  * Time: 10:06
  */
-namespace MtG\Helper;
 
 require_once __DIR__ . "/../../config.php";
 
-use Config;
-use PDO;
-use PDOException;
-
 class Database
 {
-    protected $dbh;
+    protected static $dbh;
 
     public function __construct()
     {
@@ -23,18 +18,18 @@ class Database
         $user = Config::$dbUsername;
         $password = Config::$dbPassword;
         try {
-            $this->dbh = new PDO($dsn, $user, $password);
+            self::$dbh = new PDO($dsn, $user, $password);
         } catch (PDOException $e) {
             echo "Connection Failed: " . $e->getMessage();
-            $this->dbh = null;
+            self::$dbh = null;
         }
     }
 
     /**
      * @return null
      */
-    public function getDbh()
+    public static function getDbh()
     {
-        return $this->dbh;
+        return self::$dbh;
     }
 }

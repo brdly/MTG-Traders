@@ -13,6 +13,10 @@ body {
             padding: 15px;
             margin-bottom: 10px;
             min-height: calc(100vh - 145px);
+
+            p,li.card-text {
+                white-space: pre-wrap;
+            }
         }
 
         footer {
