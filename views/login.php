@@ -6,6 +6,14 @@
 </div>
 <?php endif; ?>
 
+<?php if (count($responsebag) > 0) : ?>
+    <div class="alert alert-success" role="alert">
+        <?php foreach ($responsebag as $response): ?>
+            <?php echo $response; ?>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
+
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
     <div class="form-group">
         <label for="emailInput">Email Address</label>

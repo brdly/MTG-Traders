@@ -7,7 +7,17 @@
  */
 ?>
 
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+<?php if (count($errorbag) > 0) : ?>
+    <div class="alert alert-danger" role="alert">
+        <p><ul>
+        <?php foreach ($errorbag as $error): ?>
+            <li><?php echo $error; ?></li>
+        <?php endforeach; ?>
+        </p></ul>
+    </div>
+<?php endif; ?>
+
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" novalidate="novalidate">
     <div class="form-group">
         <label for="firstNameInput">First Name</label>
         <input type="text" class="form-control" id="firstNameInput" name="firstname" placeholder="First Name" required="required" value="<?php echo $_POST["firstname"]; ?>">
@@ -26,7 +36,7 @@
     </div>
     <div class="form-group">
         <label for="passwordConfirmInput">Confirm Password</label>
-        <input type="password" class="form-control" id="passwordConfirmInput" name="passwordConfirmation" placeholder="Confirm Password" required="required">
+        <input type="password" class="form-control" id="passwordConfirmInput" name="passwordconfirmation" placeholder="Confirm Password" required="required">
     </div>
     <div class="form-group">
         <label for="addrLineOneInput">Address Line 1</label>
@@ -55,6 +65,14 @@
                 <option value="<?php echo $key; ?>" <?php echo (($_POST["country"] == $key) ? "selected=\"selected\"" : "");?>><?php echo $value; ?></option>
             <?php endforeach; ?>
         </select>
+    </div>
+    <div class="form-group">
+        <label for="phoneNumInput">Mobile Number</label>
+        <input type="text" class="form-control" id="phoneNumInput" name="phonenum" placeholder="Phone Number" required="required" value="<?php echo $_POST["phonenum"]; ?>">
+    </div>
+    <div class="form-group">
+        <label for="verifyInput">Are you a human? What is <?php echo $captcha[0] . " plus " . $captcha[1]; ?>?</label>
+        <input type="text" class="form-control" id="verifyInput" name="verify" placeholder="Verify" required="required">
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Submit</button>

@@ -17,7 +17,7 @@ require_once __DIR__ . '/../src/helpers/Template.php';
 $view = new Template();
 
 $view->title = "Login";
-$view->user = $_SESSION["user"];
+$view->user  = $_SESSION["user"];
 
 $view->content = $view->render(__DIR__ . '/../views/account.php');
 echo $view->render(__DIR__ . '/../views/templates/main.php');

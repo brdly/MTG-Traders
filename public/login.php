@@ -12,6 +12,12 @@ if (isset($_SESSION["user"])) {
     header('Location: /');
 }
 
+$responsebag = array();
+
+if (isset($_SESSION["registerResponse"])) {
+    array_push($responsebag, $_SESSION["registerResponse"]);
+}
+
 require_once __DIR__ . '/../src/helpers/Template.php';
 require_once __DIR__ . '/../src/models/User.php';
 
@@ -22,6 +28,7 @@ if (count($_POST) > 0)
     $response = User::login($_POST['email'], $_POST['password']);
     if ($response != false) {
         $_SESSION["user"] = $response;
+        $_SESSION["loginResponse"] = "Successfully logged in.";
 
         header('Location: /account.php');
     } else {
@@ -33,6 +40,7 @@ $view = new Template();
 
 $view->title = "Login";
 $view->errorbag = $errorbag;
+$view->responsebag = $responsebag;
 
 $view->content = $view->render(__DIR__ . '/../views/login.php');
 echo $view->render(__DIR__ . '/../views/templates/main.php');

@@ -27,25 +27,34 @@ class User
 
         $dbh = $dbh::getDbh();
 
-        $sql = "INSERT INTO " . self::$table . " (`firstname`,`lastname`,`email`,`password`,`addrline1`,`addrline2`,`addrline3`,`city`,`country`,`postcode`,`phonenum`)
-                VALUES (:firstname,:lastname,:email,:password,:addrline1,:addrline2,:addrline3,:city,:country,:postcode,:phonenum)";
-        $sth = $dbh->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-        $sth->execute(array(
-            ":firstname" => $firstname,
-            ":lastname"  => $lastname,
-            ":email"     => $email,
-            ":password"  => password_hash($password, PASSWORD_DEFAULT),
-            ":addrline1" => $addrLine1,
-            ":addrline2" => $addrLine2,
-            ":addrline3" => $addrLine3,
-            ":city"      => $city,
-            ":country"   => $country,
-            ":postcode"  => $postcode,
-            ":phonenum"  => $phoneNum
-        ));
-        $response = $sth->fetch(PDO::FETCH_ASSOC);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        return $response;
+        try {
+            $sql = "INSERT INTO " . self::$table . " (`firstname`,`lastname`,`email`,`password`,`addrline1`,`addrline2`,`addrline3`,`city`,`country`,`postcode`,`phonenum`)
+                VALUES (:firstname,:lastname,:email,:password,:addrline1,:addrline2,:addrline3,:city,:country,:postcode,:phonenum)";
+            $sth = $dbh->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+            $sth->execute(array(
+                ":firstname" => $firstname,
+                ":lastname"  => $lastname,
+                ":email"     => $email,
+                ":password"  => password_hash($password, PASSWORD_DEFAULT),
+                ":addrline1" => $addrLine1,
+                ":addrline2" => $addrLine2,
+                ":addrline3" => $addrLine3,
+                ":city"      => $city,
+                ":country"   => $country,
+                ":postcode"  => $postcode,
+                ":phonenum"  => $phoneNum
+            ));
+
+            return true;
+        } catch (PDOException $e) {
+            if ($e->errorInfo[1] == 1062) {
+                return "A user with this email already exists, please supply a new email and try again.";
+            } else {
+                return "An unidentified error occurred, please check your input and try again.";
+            }
+        }
     }
 
     public static function login($email, $password)
