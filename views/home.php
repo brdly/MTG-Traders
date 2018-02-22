@@ -51,7 +51,6 @@
                         <a href="/card.php?id=<?php echo $card["id"]; ?>" class="btn btn-primary btn-sm">See Listings</a>
                         <div class="btn-group float-right" role="group" aria-label="Basic example">
                             <button class="btn btn-success btn-sm"><i class="far fa-thumbs-up"></i> <span class="badge badge-secondary"><?php echo $card["likes"]; ?></span></button>
-                            <button class="btn btn-primary btn-sm"><i class="fas fa-star"></i></button>
                             <button class="btn btn-danger btn-sm"><i class="far fa-thumbs-down"></i> <span class="badge badge-secondary"><?php echo $card["dislikes"]; ?></span></button>
                         </div>
                     </div>

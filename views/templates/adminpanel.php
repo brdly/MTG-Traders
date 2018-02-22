@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: georgebroadley
- * Date: 05/02/2018
- * Time: 21:59
+ * Date: 14/02/2018
+ * Time: 19:25
  */
 
 require_once __DIR__ . "/../../src/helpers/Navbar.php";
@@ -78,9 +78,19 @@ $nav = Navbar::generate();
             </ul>
         </div>
     </nav>
-
-    <div class="container-fluid bg-light">
-        <?php echo $content; ?>
+    <div class="row admin-layout">
+        <nav class="nav flex-column bg-light text-center">
+            <a class="nav-link" href="./admin-adverts.php">Adverts</a>
+            <a class="nav-link" href="./admin-expiredadverts.php">Expired Adverts</a>
+            <div class="dropdown-divider"></div>
+            <a class="nav-link" href="./admin-cards.php">Cards</a>
+            <a class="nav-link" href="./admin-sets.php">Sets</a>
+            <div class="dropdown-divider"></div>
+            <a class="nav-link" href="./admin-users.php">Users</a>
+        </nav>
+        <div class="container-fluid bg-light">
+            <?php echo $content; ?>
+        </div>
     </div>
 
     <footer class="bg-light">

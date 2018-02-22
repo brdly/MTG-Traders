@@ -9,14 +9,15 @@
 session_start();
 
 if (!isset($_SESSION["user"])) {
-    header('Location: /login');
+    $_SESSION["loginError"] = "You must login to access this page";
+    header('Location: /login.php');
 }
 
 require_once __DIR__ . '/../src/helpers/Template.php';
 
 $view = new Template();
 
-$view->title = "Login";
+$view->title = "Account";
 $view->user  = $_SESSION["user"];
 
 $view->content = $view->render(__DIR__ . '/../views/account.php');

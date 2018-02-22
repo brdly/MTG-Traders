@@ -13,14 +13,13 @@ class User
 {
     static protected $table = "Users";
 
-    /**
-     * @return string
-     */
+    //Returns the table from $table
     public static function getTable(): string
     {
         return self::$table;
     }
 
+    //Creates a user to put in the database
     public static function createUser($firstname, $lastname, $email, $password, $addrLine1, $addrLine2, $addrLine3, $city, $country, $postcode, $phoneNum)
     {
         $dbh = new Database();
@@ -57,6 +56,7 @@ class User
         }
     }
 
+    //Verifies a user and logs them in
     public static function login($email, $password)
     {
         $dbh = new Database();
@@ -75,5 +75,72 @@ class User
         } else {
             return $response;
         }
+    }
+
+    //Returns a user based on their ID
+    public static function getUserFromID($userid)
+    {
+        $dbh = new Database();
+
+        $dbh = $dbh::getDbh();
+
+        $sql = "SELECT * FROM `" . self::$table . "` WHERE `id` = :userid";
+        $sth = $dbh->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $sth->execute(array(':userid' => $userid));
+        $response = $sth->fetch(PDO::FETCH_ASSOC);
+
+        unset($response["password"]);
+
+        return $response;
+    }
+
+    //Returns a paginated set of users based on the page and limit
+    public static function getPaginatedUsers($page = 1, $limit)
+    {
+        $dbh = new Database();
+
+        $dbh = $dbh::getDbh();
+
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        try {
+            $sql = "SELECT * FROM `" . self::$table . "` ";
+
+            $sql = $sql . "LIMIT " . ($page - 1) * $limit . ", " . $limit;
+
+            $sth = $dbh->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+            $sth->execute();
+            return $sth->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            var_dump($e);
+            return false;
+        }
+    }
+
+    //Counts the number of rows in the table
+    public static function countRows()
+    {
+        $dbh = new Database();
+
+        $dbh = $dbh::getDbh();
+
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        try {
+            $sql = "SELECT COUNT(*) FROM `" . self::$table . "`";
+            $sth = $dbh->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+            $sth->execute();
+            return $sth->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            var_dump($e);
+            return false;
+        }
+    }
+
+    //Prepares the user for displaying on the site
+    public static function prepareUserFromUserArray($user)
+    {
+        //Converts the country code to the country string for better readability
+        $user["country"] = CountryCode::convertToCountry($user["country"]);
+
+        return $user;
     }
 }

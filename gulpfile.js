@@ -107,7 +107,7 @@ gulp.task('browserSync', function() {
     })
 });
 
-gulp.task('default', ['sass', 'js', 'browserSync'], function() {
+gulp.task('default', ['sass', 'fonts', 'js', 'browserSync'], function() {
     gulp.watch(paths.styles.files, ['sass']);
     gulp.watch(paths.javascript.files, ['js']);
     gulp.watch(paths.html.files, ['html']);

@@ -10,6 +10,7 @@ require_once __DIR__ . "/../models/Set.php";
 
 class Navbar
 {
+    //Generates an array containing the required information to populate the navigation bar
     public static function generate()
     {
         $navbar = array();

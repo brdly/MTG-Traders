@@ -12,6 +12,7 @@ class Database
 {
     protected static $dbh;
 
+    //Creates a PDO database object
     public function __construct()
     {
         $dsn = "mysql:dbname=" . Config::$dbName . ";host=" . Config::$dbHost;
@@ -25,9 +26,7 @@ class Database
         }
     }
 
-    /**
-     * @return null
-     */
+    //Returns a PDO database object
     public static function getDbh()
     {
         return self::$dbh;

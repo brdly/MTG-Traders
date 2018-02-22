@@ -9,6 +9,18 @@ body {
             margin-bottom: 10px;
         }
 
+        .row.admin-layout {
+            margin: 0;
+            nav {
+                width: 250px;
+                margin-right: 10px;
+            }
+
+            .container-fluid {
+                width: calc(100vw - 280px);
+            }
+        }
+
         .container-fluid {
             padding: 15px;
             margin-bottom: 10px;
@@ -16,6 +28,28 @@ body {
 
             p,li.card-text {
                 white-space: pre-wrap;
+            }
+
+            .card-custom-deck {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                
+                .advert-card {
+                    max-width: 300px;
+                    margin: 5px;
+
+                    .card-img-top {
+                        width: 298px;
+                        height: 298px;
+                    }
+                }
+            }
+
+            h2.error {
+                text-align: center;
+                font-size: 150px;
             }
         }
 

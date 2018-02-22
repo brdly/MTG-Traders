@@ -16,6 +16,8 @@ $responsebag = array();
 
 if (isset($_SESSION["registerResponse"])) {
     array_push($responsebag, $_SESSION["registerResponse"]);
+
+    unset($_SESSION["registerResponse"]);
 }
 
 require_once __DIR__ . '/../src/helpers/Template.php';
@@ -35,6 +37,13 @@ if (count($_POST) > 0)
         array_push($errorbag, "Username or password do not match");
     }
 }
+
+if (isset($_SESSION["loginError"])) {
+    array_push($errorbag, $_SESSION["loginError"]);
+
+    unset($_SESSION["loginError"]);
+}
+
 
 $view = new Template();
 

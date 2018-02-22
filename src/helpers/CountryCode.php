@@ -8,6 +8,8 @@
 
 class CountryCode
 {
+
+    //ISO 3166-1 alpha-2 Country Code array with their accompanying country names
     static protected $countryList = array(
         "AF" => "Afghanistan",
         "AX" => "Åland Islands",
@@ -255,19 +257,20 @@ class CountryCode
         "ZW" => "Zimbabwe"
     );
 
+
+    //Converts ISO 3166-1 alpha-2 country code to full country name
     public static function convertToCountry($countryCode)
     {
         return self::$countryList[$countryCode];
     }
 
+    //Converts country name to ISO 3166-1 alpha-2 country code
     public static function convertToCode($country)
     {
         return array_search($country, self::$countryList);
     }
 
-    /**
-     * @return array
-     */
+    //Returns the entire country array
     public static function getCountryList(): array
     {
         return self::$countryList;
