@@ -1,6 +1,12 @@
 {
-    "name": "ClientServerSystemsAssignment_GB",
-    "version": "0.0.1",
+    "name": "MTGTraders",
+    "version": "1.0.0",
+    "description": "Client Server Systems University Second Year Project",
+    "homepage": "https://github.com/brdly/MTGTraders",
+    "author": {
+        "name": "George Broadley",
+        "email": "projects@brdly.io"
+    },
     "dependencies": {
         "bootstrap": "^4.0.0",
         "jquery": "^3.3.1",
