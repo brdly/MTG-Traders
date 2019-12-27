@@ -3,7 +3,7 @@
     "description": "Second Year Project for Client Server Systems",
     "license": "MIT",
     "authors": [
-        { "name": "George Broadley",  "email": "G.Broadley@edu.salford.ac.uk" }
+        { "name": "George Broadley",  "email": "projects@brdly.io" }
     ],
     "require": {
         "mtgsdk/mtgsdk": "dev-master",
